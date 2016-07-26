@@ -1,8 +1,15 @@
 var express = require('express');
 var pg = require('pg');
 var app = express();
+var path = require('path');
 
 var connectionString = require('../modules/connection');
+
+app.use(express.static('public'));
+
+app.get('/', function(req, res) {
+  res.sendFile(path.resolve('public/views/index.html'));
+});
 
 /* Get route to return all food in the database. */
 app.get('/food', function (req, res) {
